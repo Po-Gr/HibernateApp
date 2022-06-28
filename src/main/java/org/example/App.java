@@ -2,14 +2,12 @@ package org.example;
 
 import org.example.model.Item;
 import org.example.model.Person;
-import org.hibernate.QueryException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Hello world!
@@ -26,17 +24,14 @@ public class App
         try {
             session.beginTransaction();
 
-            Person person = new Person("Bill", 18);
+            Person person = new Person("Test Cascading 4",22);
 
-            Item item = new Item("Keyboard", person);
-
-            List<Item> items = new ArrayList<>();
-            items.add(item);
-
-            person.setItems(items);
+            person.addItem(new Item("Computer 1"));
+            person.addItem(new Item("Computer 2"));
+            person.addItem(new Item("Computer 3"));
 
             session.save(person);
-            session.save(item);
+//            session.save(item);
 
             session.getTransaction().commit();
         }
