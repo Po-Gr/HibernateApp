@@ -24,7 +24,20 @@ public class Person {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Item> items;
 
+    @OneToOne(mappedBy = "citizen")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Passport passport;
+
     public Person() {
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
+        passport.setCitizen(this);
     }
 
     public Person(String name, int age) {
